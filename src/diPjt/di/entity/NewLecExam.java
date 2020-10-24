@@ -7,8 +7,32 @@ public class NewLecExam implements Exam {
 	private int math;
 	private int com;
 	
+	public NewLecExam() {
+	}
 	
 	
+	
+	
+	
+	public NewLecExam(int kor, int eng, int math, int com) {
+		super();
+		this.kor = kor;
+		this.eng = eng;
+		this.math = math;
+		this.com = com;
+	}
+	
+	public NewLecExam(float kor, float eng, float math, float com) {
+		super();
+		this.kor = (int)kor+1;
+		this.eng = (int) eng+1;
+		this.math =  (int)math+1;
+		this.com =  (int)com+1;
+	}
+
+
+
+
 	@Override
 	public int total() {
 		// TODO Auto-generated method stub
@@ -17,7 +41,7 @@ public class NewLecExam implements Exam {
 
 	@Override
 	public float avg() {
-		// TODO Auto-generated method stub
+		// TODO Autoㄴ-generated method stub
 		return total() / 4.0f ;
 	}
 
@@ -51,6 +75,15 @@ public class NewLecExam implements Exam {
 
 	public void setCom(int com) {
 		this.com = com;
+	}
+
+
+
+
+
+	@Override
+	public String toString() {
+		return "NewLecExam [kor=" + kor + ", eng=" + eng + ", math=" + math + ", com=" + com + "]";
 	}
 	
 	

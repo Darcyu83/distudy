@@ -1,34 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 
-<!-- Exam exam = new NewLecExam(); -->
-<bean id="exam" class="diPjt.di.entity.NewLecExam">
+	<!-- Exam exam = new NewLecExam(); -->
+	<bean id="exam" class="diPjt.di.entity.NewLecExam">
 
-<!-- exam.kor = 20
- -->
-<property name="kor" >
-<value>20</value>
-</property>
-<property name="eng" value="50"></property>
-<property name="math" value="80"></property>
-<property name="com" value="90"></property>
-</bean>
+		<!-- exam.kor = 20 setter 사용해서 설정 하는 방법 -->
+		<property name="kor">
+			<value>20</value>
+		</property>
+		<property name="eng" value="50"></property>
+		<property name="math" value="80"></property>
+		<property name="com" value="90"></property>
 
-<!-- ExamConsole console = new InlineExamConsole(); -->
-<bean id="console" class="diPjt.di.ui.GridExamConsole">
+	</bean>
 
-<!-- console.setExam(exam); -->
-<!-- Injection 주입 -->
-<!--  exam은 ref 타입:변수의 값을 읽음. value타입 : primitive type 기본형타입 실제값. -->
-<property name="exam" ref="exam"/>
+	<bean id="exam1" class="diPjt.di.entity.NewLecExam">
+		<constructor-arg index="0" value="1" />
+		<constructor-arg index="2" value="2" />
+		<constructor-arg index="1" value="3" />
+		<constructor-arg index="3" value="4" />
+	</bean>
+	<!-- 생성자 멤버필드 순서 대신에 멤버필드명으로 오해의 소지를 줄임 -->
+	<bean id="exam2" class="diPjt.di.entity.NewLecExam">
+		<constructor-arg name="kor" value="10" />
+		<constructor-arg name="eng" value="20" />
+		<constructor-arg name="com" value="30" />
+		<constructor-arg name="math" value="40" />
+	</bean>
 
-</bean>
+	<!-- 생성자 overload 대응 법 type 추가 -->
+	<bean id="exam3" class="diPjt.di.entity.NewLecExam">
+		<constructor-arg name="kor" type="float" value="10" />
+		<constructor-arg name="eng" type="float" value="20" />
+		<constructor-arg name="com" type="float" value="30" />
+		<constructor-arg name="math" type="float" value="40" />
+	</bean>
+
+	<!-- namespace 추가 > 용도: 식별용 like 김길동, 홍길동 성과같이 -->
+	<!-- <홍길동:bean></홍길동:bean> <김길동:bean></김길동:bean> -->
+	<bean id="exam4" class="diPjt.di.entity.NewLecExam" p:kor="10"
+		p:eng="20" />
+
+	<!-- ExamConsole console = new InlineExamConsole(); -->
+	<bean id="console" class="diPjt.di.ui.GridExamConsole">
+
+		<!-- console.setExam(exam); -->
+		<!-- Injection 주입 -->
+		<!-- exam은 ref 타입:변수의 값을 읽음. value타입 : primitive type 기본형타입 실제값. -->
+		<property name="exam" ref="exam" />
+
+	</bean>
+
+	<!-- ArrayList(생성자 변수에 <list>태그내용이 들어감) -->
+	<bean id="exams_old" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<bean class="diPjt.di.entity.NewLecExam" p:kor="200"
+					p:eng="210" />
+				<ref bean="exam" />
+			</list>
+		</constructor-arg>
+	</bean>
 
 
-
-
+<!-- <list>안의  내용을 밖으로 빼서 객체 설정-->
+		<util:list id="exams" list-class="java.util.ArrayList">
+				<bean class="diPjt.di.entity.NewLecExam" p:kor="200"
+					p:eng="210" />
+				<ref bean="exam" />
+			</util:list>
 
 
 </beans>
