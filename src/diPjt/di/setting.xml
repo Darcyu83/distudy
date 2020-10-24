@@ -3,11 +3,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 
+	<!-- @AutoWired 어노테이션을 검색하게 설정 -->
+	<context:annotation-config />
 	<!-- Exam exam = new NewLecExam(); -->
-	<bean id="exam" class="diPjt.di.entity.NewLecExam">
+	<bean id="exam0" class="diPjt.di.entity.NewLecExam">
 
 		<!-- exam.kor = 20 setter 사용해서 설정 하는 방법 -->
 		<property name="kor">
@@ -19,7 +23,7 @@
 
 	</bean>
 
-	<bean id="exam1" class="diPjt.di.entity.NewLecExam">
+	<bean id="exam" class="diPjt.di.entity.NewLecExam">
 		<constructor-arg index="0" value="1" />
 		<constructor-arg index="2" value="2" />
 		<constructor-arg index="1" value="3" />
@@ -47,12 +51,13 @@
 		p:eng="20" />
 
 	<!-- ExamConsole console = new InlineExamConsole(); -->
-	<bean id="console" class="diPjt.di.ui.GridExamConsole">
-
+	<bean id="console" class="diPjt.di.ui.InlineExamConsole">
 		<!-- console.setExam(exam); -->
 		<!-- Injection 주입 -->
 		<!-- exam은 ref 타입:변수의 값을 읽음. value타입 : primitive type 기본형타입 실제값. -->
-		<property name="exam" ref="exam" />
+		<!-- <property name="exam" ref="exam" /> -->
+		<!-- @AutoWired 어노테이션을 검색하게 설정 -->
+
 
 	</bean>
 
@@ -62,18 +67,17 @@
 			<list>
 				<bean class="diPjt.di.entity.NewLecExam" p:kor="200"
 					p:eng="210" />
-				<ref bean="exam" />
+				<!-- <ref bean="exam" /> -->
 			</list>
 		</constructor-arg>
 	</bean>
 
 
-<!-- <list>안의  내용을 밖으로 빼서 객체 설정-->
-		<util:list id="exams" list-class="java.util.ArrayList">
-				<bean class="diPjt.di.entity.NewLecExam" p:kor="200"
-					p:eng="210" />
-				<ref bean="exam" />
-			</util:list>
+	<!-- <list>안의 내용을 밖으로 빼서 객체 설정 -->
+	<util:list id="exams" list-class="java.util.ArrayList">
+		<bean class="diPjt.di.entity.NewLecExam" p:kor="200" p:eng="210" />
+		<!-- <ref bean="exam" /> -->
+	</util:list>
 
 
 </beans>

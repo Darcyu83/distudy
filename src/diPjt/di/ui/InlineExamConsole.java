@@ -1,5 +1,8 @@
 package diPjt.di.ui;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
 import diPjt.di.entity.Exam;
 
 public class InlineExamConsole implements ExamConsole {
@@ -25,7 +28,8 @@ public class InlineExamConsole implements ExamConsole {
 
 
 
-
+	@Autowired
+	@Qualifier("exam0")
 	@Override
 	public void setExam(Exam exam) {
 		this.exam = exam;		
