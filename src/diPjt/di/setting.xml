@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- Exam exam = new NewLecExam(); -->
+<bean id="exam" class="diPjt.di.entity.NewLecExam">
+
+<!-- exam.kor = 20
+ -->
+<property name="kor" >
+<value>20</value>
+</property>
+<property name="eng" value="50"></property>
+<property name="math" value="80"></property>
+<property name="com" value="90"></property>
+</bean>
+
+<!-- ExamConsole console = new InlineExamConsole(); -->
+<bean id="console" class="diPjt.di.ui.GridExamConsole">
+
+<!-- console.setExam(exam); -->
+<!-- Injection 주입 -->
+<!--  exam은 ref 타입:변수의 값을 읽음. value타입 : primitive type 기본형타입 실제값. -->
+<property name="exam" ref="exam"/>
+
+</bean>
+
+
+
+
+
+
+</beans>
