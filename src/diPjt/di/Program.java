@@ -24,6 +24,13 @@ public class Program {
 		//ApplicationContext context = 
 		//		new AnnotationConfigApplicationContext(NewLecDIConfig.class);
 		
+		//3. 설정방법 2 from Config.java
+		 
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+		
+		context.register(NewLecDIConfig.class);
+		context.refresh();
+		
 		
 		
 		
@@ -44,14 +51,7 @@ public class Program {
 		
 		
 		
-		//3. 설정방법 2 from Config.java
-		
-		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		
-		context.register(NewLecDIConfig.class);
-		context.refresh();
-		
-		
+
 		
 		
 		ExamConsole console = (ExamConsole)context.getBean("console");

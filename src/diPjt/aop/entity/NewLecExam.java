@@ -1,15 +1,7 @@
-package diPjt.di.entity;
-
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-
-import org.springframework.beans.factory.annotation.Value;
-
+package diPjt.aop.entity;
 
 public class NewLecExam implements Exam {
-	@Value("200")
 	private int kor;
-	@Value("300")
 	private int eng;
 	private int math;
 	private int com;
@@ -43,25 +35,38 @@ public class NewLecExam implements Exam {
 	@Override
 	public int total() {
 		
-		long start = System.currentTimeMillis();
-		SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-		String str = dayTime.format(new Date(start));
-		System.out.println(str);
+		// 속도 측정 코드  aop 적용 전 
+		
+		//long start = System.currentTimeMillis();		
+		
+		
 		
 		
 		int result =  kor+eng+math+com;
 		
 		
-		long end = System.currentTimeMillis();
+		try {
+			Thread.sleep(200);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		
-		String msg = (end-start) + "ms가 걸림";
-		System.out.println(msg);
+		
+		//long end = System.currentTimeMillis();
+		//String message = (end - start) + "ms 시간이 걸림";
+		//System.out.println(message);
+		
+		
 		return result ;
 	}
 
 	@Override
 	public float avg() {
-		return total() / 4.0f ;
+		
+		float result = total() / 4.0f ;
+		
+		
+		return result ;
 	}
 
 	public int getKor() {
