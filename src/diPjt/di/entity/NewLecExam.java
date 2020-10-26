@@ -1,8 +1,14 @@
 package diPjt.di.entity;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
+
 public class NewLecExam implements Exam {
-	
+	@Value("200")
 	private int kor;
+	@Value("300")
 	private int eng;
 	private int math;
 	private int com;

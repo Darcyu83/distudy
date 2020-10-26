@@ -2,12 +2,16 @@ package diPjt.di.ui;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import diPjt.di.entity.Exam;
 
+@Component("console")
 public class InlineExamConsole implements ExamConsole {
 
-	
+
+	@Autowired(required = true)
+	//@Qualifier("exam10")
 	private Exam exam;
 	
 
@@ -23,13 +27,15 @@ public class InlineExamConsole implements ExamConsole {
 
 	@Override
 	public void print() {
+		if(exam == null) {
+		System.out.printf("total is %d, avg is %f\n", 0,0.0);
+		}else {
 		System.out.printf("total is %d, avg is %f\n", exam.total(), exam.avg());
+		}
 	}
 
 
 
-	@Autowired
-	@Qualifier("exam0")
 	@Override
 	public void setExam(Exam exam) {
 		this.exam = exam;		
