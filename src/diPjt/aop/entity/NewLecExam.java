@@ -40,7 +40,7 @@ public class NewLecExam implements Exam {
 		//long start = System.currentTimeMillis();		
 		
 		
-		
+		if(kor >100 )throw new IllegalArgumentException("유효하지 않은 숫자");
 		
 		int result =  kor+eng+math+com;
 		
